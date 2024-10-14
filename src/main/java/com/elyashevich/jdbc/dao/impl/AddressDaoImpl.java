@@ -13,6 +13,8 @@ import java.util.List;
 
 public class AddressDaoImpl implements AddressDao {
 
+    private final Connection connection;
+
     private final static String SELECT_ALL_QUERY =
             "SELECT ID, COUNTRY, CITY, STREET, POST_CODE FROM ADDRESS";
     private final static String SELECT_BY_ID_QUERY =
@@ -23,7 +25,6 @@ public class AddressDaoImpl implements AddressDao {
     private final static String UPDATE_QUERY = "UPDATE ADDRESS SET COUNTRY=?, CITY=?, STREET=?, POST_CODE=? WHERE ID=?";
     private final static String DELETE_QUERY = "DELETE FROM ADDRESS WHERE ID=?";
 
-    private final Connection connection;
 
     public AddressDaoImpl(Connection connection) {
         this.connection = connection;
@@ -33,7 +34,7 @@ public class AddressDaoImpl implements AddressDao {
     public List<Address> findAll() throws SQLException {
         List<Address> addresses = new ArrayList<>();
 
-        try (Statement statement = connection.createStatement()) {
+        try (Statement statement = this.connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(SELECT_ALL_QUERY);
 
@@ -51,8 +52,8 @@ public class AddressDaoImpl implements AddressDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                connection.close();
+            if (this.connection != null) {
+                this.connection.close();
             }
         }
         return addresses;
@@ -64,7 +65,7 @@ public class AddressDaoImpl implements AddressDao {
 
         Address address = new Address();
         try {
-            preparedStatement = connection.prepareStatement(SELECT_BY_ID_QUERY);
+            preparedStatement = this.connection.prepareStatement(SELECT_BY_ID_QUERY);
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -82,8 +83,8 @@ public class AddressDaoImpl implements AddressDao {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-            if (connection != null) {
-                connection.close();
+            if (this.connection != null) {
+                this.connection.close();
             }
         }
         return address;
@@ -91,7 +92,7 @@ public class AddressDaoImpl implements AddressDao {
 
     @Override
     public void create(Address address) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
+        try (PreparedStatement preparedStatement = this.connection.prepareStatement(INSERT_QUERY)) {
             preparedStatement.setLong(1, address.getId());
             preparedStatement.setString(2, address.getCountry());
             preparedStatement.setString(3, address.getCity());
@@ -101,15 +102,15 @@ public class AddressDaoImpl implements AddressDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                connection.close();
+            if (this.connection != null) {
+                this.connection.close();
             }
         }
     }
 
     @Override
     public void update(Address address) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY)) {
+        try (PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE_QUERY)) {
             preparedStatement.setLong(1, address.getId());
             preparedStatement.setString(2, address.getCountry());
             preparedStatement.setString(3, address.getCity());
@@ -120,23 +121,23 @@ public class AddressDaoImpl implements AddressDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                connection.close();
+            if (this.connection != null) {
+                this.connection.close();
             }
         }
     }
 
     @Override
     public void remove(Address address) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY)) {
+        try (PreparedStatement preparedStatement = this.connection.prepareStatement(DELETE_QUERY)) {
             preparedStatement.setLong(1, address.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                connection.close();
+            if (this.connection != null) {
+                this.connection.close();
             }
         }
     }
