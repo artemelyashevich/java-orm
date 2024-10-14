@@ -43,16 +43,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employee.setFirstname(resultSet.getString("FIRST_NAME"));
                 employee.setLastname(resultSet.getString("LAST_NAME"));
                 employee.setAddressId(resultSet.getLong("ADDRESS_ID"));
-                employee.setBirthDate(resultSet.getDate("BIRTHDATE"));
+                employee.setBirthDate(resultSet.getDate("BIRTHDAY"));
 
                 employees.add(employee);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return employees;
     }
@@ -75,10 +71,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return employee;
     }
@@ -95,10 +87,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -114,10 +102,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -129,10 +113,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 }

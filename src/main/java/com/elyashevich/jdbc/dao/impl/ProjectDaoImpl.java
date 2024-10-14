@@ -43,10 +43,6 @@ public class ProjectDaoImpl implements ProjectDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return projects;
     }
@@ -73,9 +69,6 @@ public class ProjectDaoImpl implements ProjectDao {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return project;
     }
@@ -89,10 +82,6 @@ public class ProjectDaoImpl implements ProjectDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -105,10 +94,6 @@ public class ProjectDaoImpl implements ProjectDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -120,10 +105,6 @@ public class ProjectDaoImpl implements ProjectDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 }

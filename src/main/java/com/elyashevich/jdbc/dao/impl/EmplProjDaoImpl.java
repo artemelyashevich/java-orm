@@ -3,7 +3,11 @@ package com.elyashevich.jdbc.dao.impl;
 import com.elyashevich.jdbc.dao.EmplProjDao;
 import com.elyashevich.jdbc.entity.EmplProj;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,10 +45,6 @@ public class EmplProjDaoImpl implements EmplProjDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return null;
     }
@@ -63,10 +63,6 @@ public class EmplProjDaoImpl implements EmplProjDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return emplProj;
     }
@@ -80,10 +76,6 @@ public class EmplProjDaoImpl implements EmplProjDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -98,10 +90,6 @@ public class EmplProjDaoImpl implements EmplProjDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -116,10 +104,6 @@ public class EmplProjDaoImpl implements EmplProjDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 }

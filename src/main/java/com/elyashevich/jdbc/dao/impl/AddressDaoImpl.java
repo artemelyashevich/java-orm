@@ -51,10 +51,6 @@ public class AddressDaoImpl implements AddressDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return addresses;
     }
@@ -83,9 +79,6 @@ public class AddressDaoImpl implements AddressDao {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
         return address;
     }
@@ -96,15 +89,12 @@ public class AddressDaoImpl implements AddressDao {
             preparedStatement.setLong(1, address.getId());
             preparedStatement.setString(2, address.getCountry());
             preparedStatement.setString(3, address.getCity());
-            preparedStatement.setString(4, address.getPostCode());
+            preparedStatement.setString(4, address.getStreet());
+            preparedStatement.setString(5, address.getPostCode());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -120,10 +110,6 @@ public class AddressDaoImpl implements AddressDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 
@@ -135,10 +121,6 @@ public class AddressDaoImpl implements AddressDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (this.connection != null) {
-                this.connection.close();
-            }
         }
     }
 }
